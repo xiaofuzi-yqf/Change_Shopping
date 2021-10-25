@@ -1,0 +1,69 @@
+﻿@model PagedList<Change.Models.Product>
+
+@{
+    ViewBag.Title = "商品列表";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>商品列表</h2>
+
+<p>
+    @Html.ActionLink("上架新商品", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            图片
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MarketPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.CateName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+            @if(item.Photo.Count>0)
+            { 
+                <img src="@Html.DisplayFor(modelItem => item.Photo.First().PhotoUrl )" style="width:100px;height:50px;" />
+            }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MarketPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CateName)
+            </td>
+            <td>
+                @Html.ActionLink("编辑", "Edit", new { id = item.ProductId }) |
+                <a href="/Photos/Create?id=@item.ProductId">管理图片</a> |
+                @Html.ActionLink("详情", "Details", new { id = item.ProductId }, new { target = "_blank" }) |
+                @Html.ActionLink("删除", "Delete", new { id = item.ProductId })
+            </td>
+        </tr>
+    }
+</table>
+@Html.Pager(Model).Options(o => o.SetPageIndexParameterName("id").SetHorizontalAlign("right").SetPagerItemTemplate("&nbsp;{0}"))

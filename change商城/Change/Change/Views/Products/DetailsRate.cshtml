@@ -1,0 +1,36 @@
+﻿@model Change.Models.Product
+
+@{
+    ViewBag.Title = "商品评价";
+    Layout = "~/Views/Shared/_LayoutDetail.cshtml";
+}
+
+<div id="detail">
+    <ul>
+        <li><a href="/Products/Details/@Model.ProductId">商品详情</a></li>
+        <li style="border-top:3px solid red; height:38px;line-height:38px">
+            <a href="/Products/DetailsRate/@Model.ProductId">累计评价(<span class="red">@ViewBag.TotalRate</span>)</a>
+        </li>
+    </ul>
+    <div id="pingsort">
+        <input type="radio" checked name="state" /> 全部
+        <input type="radio" name="state" /> 好评(200)
+        <input type="radio" name="state" /> 中评(10)
+        <input type="radio" name="state" /> 差评(30)
+        <a href="#">按默认</a> | <a href="#">按时间</a>
+    </div>
+    <div id="pingjias">
+        @foreach (Appraise item in Model.Appraise)
+        {
+            <dl>
+                <dt>
+                    【 @(item.Grade == 0 ? "好评" : item.Grade == 1 ? "中评" : "差评") 】
+                    @Html.Raw(item.Content)
+                </dt>
+                <dd>
+                    @item.Users.UserName <span id="date">2019.6.10</span>
+                </dd>
+            </dl>
+        }
+    </div>
+</div>

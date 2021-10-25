@@ -1,0 +1,17 @@
+﻿@model Change.Models.News
+
+@{
+    ViewBag.Title = "资讯新闻";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style=" text-align:center;width:800px;margin:0px auto;">
+    <h2 style="font-size:18px;font-weight:bold;margin:10px 0px;">@Model.Title</h2>
+    <div>
+        <div style="border-bottom:1px dashed gray;margin:5px">分类：<a href="/Home/News?type=@Model.NTypes">@Model.NTypes</a> | 发布时间： @Model.PushTime  </div>
+        <div><img src="@Model.PhotoUrl" /></div>
+        <div>@Html.Raw(Model.Content)</div>
+    </div>
+
+</div>
+

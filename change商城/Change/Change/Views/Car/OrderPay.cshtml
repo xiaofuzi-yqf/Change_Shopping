@@ -1,0 +1,69 @@
+﻿@model Change.Models.Orders
+@{
+    ViewBag.Title = "支付订单";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--小标题-->
+<div id="smalltitle">
+    <p> <span><a href="#">首页</a>></span> <span>我的Change ></span> 支付订单</p>
+</div>
+<div id="central">
+    <!--购物车图标-->
+    <div id="carlogo">
+        <ul>
+            <li id="carlogo1_cur">
+                <p style="color:#fff;">1  我的购物车</p>
+            </li>
+            <li id="carlogo2_cur">
+                <p style="color:#fff;">2  填写核对订单信息</p>
+            </li>
+            <li id="carlogo3_cur">
+                <p style="color:#fff;">3  成功提交订单</p>
+            </li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+    <div id="address">
+        <div id="adds" style="padding-left:50px;margin:10px;">
+            <dl style="overflow:hidden;">
+                <dt style="float:left;"><img src="/images/icon/蓝色对号.png" /> </dt>
+                <dd style="margin-left:80px;margin-top:5px;">
+                    <span id="success" style="font-size:20px;">订单提交成功，应付金额 
+                    <span class="red">@String.Format("{0:C2}", Model.Total) </span>元</span><br />
+                    订单号：@Model.OrdersID 请您在1日内完成支付，否则订单会被自动取消
+                </dd>
+            </dl>
+        </div>
+        <h2>在线支付 </h2>
+        <hr />
+    </div>
+    <table id="car">
+        <tr>
+            <td colspan="6" style="text-align:left"><input type="radio" name="bank" /><img src="/images/icon/zhifubao.png" align="center" checked /> </td>
+        </tr>
+        <tr>
+            <td style="width: 200px; "><input type="radio" name="bank" /><img src="/images/icon/bank1.png" align="center" /></td>
+            <td style="width: 200px; "><input type="radio" name="bank" /><img src="/images/icon/bank2.png" align="center" /></td>
+            <td style="width: 200px; "><input type="radio" name="bank" /><img src="/images/icon/bank3.png" align="center" /></td>
+            <td style="width: 200px; "><input type="radio" name="bank" /><img src="/images/icon/bank4.png" align="center" /></td>
+        </tr>
+        <tr>
+            <td style="width: 200px; "><input type="radio" name="bank" /><img src="/images/icon/bank5.png" align="center" /></td>
+            <td style="width: 200px; "><input type="radio" name="bank" /><img src="/images/icon/bank6.png" align="center" /></td>
+            <td style="width: 200px; "><input type="radio" name="bank" /><img src="/images/icon/bank7.png" align="center" /></td>
+            <td style="width: 200px; "><input type="radio" name="bank" /><img src="/images/icon/bank8.png" align="center" /></td>
+        </tr>
+        <tr>
+            <td colspan="6" style="text-align:center">
+                @using (Html.BeginForm("OrderPay", "Car"))
+                {
+                    @Html.HiddenFor(model => model.OrdersID)
+                    <input type="submit" value="立即支付" class="btn btn-default" />
+                }
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+

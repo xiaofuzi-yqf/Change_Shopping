@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Change.Models.News>
+@{
+    ViewBag.Title = "新闻资讯";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--小标题-->
+<div id="smalltitle">
+    <p>
+        <span><a href="/Home/Index">首页</a>> @ViewBag.type </span>
+    </p>
+</div>
+<div class="News">
+    <ul>
+        @foreach (News item in Model)
+        {
+            <li style="padding:5px 20px;border-bottom:1px dashed gray;">
+                <a href="/News/Details/@item.NewsID">
+                    <img src="@item.PhotoUrl" width="150px" align="middle" /> @item.Title  [ @item.PushTime ]
+                </a>
+            </li>
+        }
+    </ul>
+</div>

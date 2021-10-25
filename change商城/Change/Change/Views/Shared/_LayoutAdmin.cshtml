@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Change商城-后台 - @ViewBag.Title</title>
+    <link href="/css/globalAdmin1.css" rel="stylesheet" type="text/css">
+    <link href="/css/Site.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="center">
+        <!--头部-->
+        <div id="logo">
+            <ul>
+                <li><img src="/images/logo/ChangeWorld.png" alt="Change后台管理" /></li>
+                <li class="menu"><a href="/Admin/Index">后台主页</a></li>
+                <li class="menu"><a href="/News/Index">促销资讯</a></li>
+                <li class="menu"><a href="/Categories/Index">商品类型</a></li>
+                <li class="menu"><a href="/Products/Index">上架商品</a></li>
+                <li class="menu"><a href="/Orders/Index">订单管理</a></li>
+                <li class="menu"><a href="/Users/Index">用户管理</a></li>
+                <li class="menu"><a href="/Home/Index" target="_blank">网站首页</a></li>
+                <li class="menu"><a href="/Admin/Logout">退出后台</a></li>
+                <li class="menu">欢迎您 <span style="color:red;">@(MyAuthentication.GetUserName()) </span></li>
+            </ul>
+        </div>
+        <!--中间内容-->
+        <div id="content">
+            <div id="indexwelcome">
+                <section>
+                    @RenderBody()
+                </section>
+            </div>
+        </div>
+        <!--底部-->
+        <div id="copytop"></div>
+        <div id="copy">
+            <p>©2016 Change Technology official website retains all rights.鄂ICP备16001830号</p>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

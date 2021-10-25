@@ -1,0 +1,82 @@
+﻿@model Change.Models.Users
+@{
+    ViewBag.Title = "注册";
+    Layout = null;
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Change官网 - @ViewBag</title>
+    <link href="/css/global.css" rel="stylesheet" type="text/css">
+    <link href="/css/Site.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div id="all">
+        <!--头部-->
+        <div id="head">
+            <ul>
+                <li id="headone"><a href="/Home/Index"> <img src="/images/logo/logo.png" alt="Change官网" /></a></li>
+                <li id="headtwo">
+                    <a href="/Home/Index">☞Change商城</a>
+                    [ <a href="/Home/Login">登录</a> | <a href="/Home/Register">注册</a> ]
+                </li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <!--登录窗体-->
+        <div id="middle">
+            <div id="register" style="width:600px; margin:0px auto;">
+                <h2>用户注册</h2>
+                <hr />
+                @using (Html.BeginForm("Register", "Home"))
+                {
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "text" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Pwd, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(model => model.Pwd, htmlAttributes: new { @class = "text" })
+                            @Html.ValidationMessageFor(model => model.Pwd, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "text" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nick, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Nick, new { htmlAttributes = new { @class = "text" } })
+                            @Html.ValidationMessageFor(model => model.Nick, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    
+                    <input type="submit" class="btn" value="注 册" />
+                }
+            </div>
+        </div>
+        <!--尾部-->
+        <div id="foots">
+            <div id="copy"> <p>©2016 Change Technology official website retains all rights.鄂ICP备16001830号</p></div>
+        </div>
+    </div>
+</body>
+</html>
+
+

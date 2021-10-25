@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="566e535f5f7546028c07221fa76a79e7" Name="Diagram1">
+        <EntityTypeShape EntityType="ChangeDBModel.AdminUser" Width="1.5" PointX="8.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChangeDBModel.Appraise" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChangeDBModel.Category" Width="1.5" PointX="1.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChangeDBModel.Delivery" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChangeDBModel.Favorite" Width="1.5" PointX="6" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChangeDBModel.News" Width="1.5" PointX="9" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChangeDBModel.Orders" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChangeDBModel.OrdersDetail" Width="1.5" PointX="7.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChangeDBModel.Photo" Width="1.5" PointX="6" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChangeDBModel.Product" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChangeDBModel.Users" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="ChangeDBModel.FK__Appraise__Produc__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="ChangeDBModel.FK__Appraise__UserId__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="ChangeDBModel.FK__Category__Parent__1920BF5C" ManuallyRouted="false" />
+        <AssociationConnector Association="ChangeDBModel.FK__Product__CateId__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="ChangeDBModel.FK__Delivery__UserId__15502E78" ManuallyRouted="false" />
+        <AssociationConnector Association="ChangeDBModel.FK__Orders__Delivery__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="ChangeDBModel.FK_Users_Delivery" ManuallyRouted="false" />
+        <AssociationConnector Association="ChangeDBModel.FK__Favorite__Produc__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="ChangeDBModel.FK__Favorite__UserId__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="ChangeDBModel.FK__Orders__UserId__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="ChangeDBModel.FK__OrdersDet__Order__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="ChangeDBModel.FK__OrdersDet__Produ__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="ChangeDBModel.FK__Photo__ProductId__1FCDBCEB" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

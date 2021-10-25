@@ -1,0 +1,69 @@
+﻿@model PagedList<Change.Models.News>
+
+@{
+    ViewBag.Title = "新闻资讯列表";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("新建资讯", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PhotoUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NTypes)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.PushTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.States)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            <img src="@Html.DisplayFor(modelItem => item.PhotoUrl)" width="100" height="50" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NTypes)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.PushTime)
+        </td>
+        <td>
+            @(item.States==1?"":"置顶")
+        </td>
+        <td>
+            @Html.ActionLink("编辑", "Edit", new { id = item.NewsID }) |
+            @Html.ActionLink("详情", "Details", new { id = item.NewsID }) |
+            @Html.ActionLink("删除", "Delete", new { id = item.NewsID })
+            @if (item.States == 0)
+            {
+                @Html.ActionLink("取消置顶", "SetTop", new { id = item.NewsID, states = 1 })
+            }
+            else
+            {
+                @Html.ActionLink("置顶", "SetTop", new { id = item.NewsID, states = 0 })
+            }
+        </td>
+    </tr>
+    }
+</table>
+@Html.Pager(Model).Options(o => o.SetPageIndexParameterName("id").SetHorizontalAlign("right").SetPagerItemTemplate("&nbsp;{0}"))

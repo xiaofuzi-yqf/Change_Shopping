@@ -1,0 +1,76 @@
+﻿@model Change.Models.Orders
+@{
+    ViewBag.Title = "核对订单";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="smalltitle">
+    <p> <span><a href="#">首页</a>></span> <span>我的Change ></span> 核对订单</p>
+</div>
+<div id="central">
+    <!--购物车图标-->
+    <div id="carlogo">
+        <ul>
+            <li id="carlogo1_cur">
+                <p style="color:#fff;">1  我的购物车</p>
+            </li>
+            <li id="carlogo2_cur">
+                <p style="color:#fff;">2  填写核对订单信息</p>
+            </li>
+            <li id="carlogo3">
+                <p>3  成功提交订单</p>
+            </li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+
+    @using (Html.BeginForm("Order", "Car"))
+    {
+    <div id="address">
+        <h2>收货地址 <a href="#" style="font-size:14px;">  +添加新地址</a></h2><hr />
+        <div id="adds" style="padding-left:50px;margin:10px;">
+            @foreach (var item in Model.Users.Delivery)
+            {
+                <p>
+                    <input type="radio" name="DeliveryID" value="@item.DeliveryID" @(item.DeliveryID == Model.DeliveryID ? "checked" : "") />
+                    @item.Consignee (@item.Phone) @item.Complete
+                </p>
+            }
+            备注：
+            @Html.TextAreaFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <h2>订单信息 </h2><hr />
+    </div>
+    <table id="car">
+        <tr class="th">
+            <td style="width: 100px; ">图片</td>
+            <td style="width: 200px; ">名称</td>
+            <td style="width: 100px; ">单价</td>
+            <td style="width: 200px; ">数量</td>
+            <td style="width: 100px; ">小计</td>
+        </tr>
+        @foreach (var item in Model.OrdersDetail)
+        {
+            <tr>
+                <td><img src="@item.Product.Photo.First().PhotoUrl" width="100px" height="100px" /></td>
+                <td>@item.Product.Title</td>
+                <td>@String.Format("{0:C2}", item.Product.Price)</td>
+                <td>@item.Quantity </td>
+                <td>@String.Format("{0:C2}", item.Quantity * item.Product.Price)</td>
+            </tr>
+        }
+        <tr class="th">
+            <td colspan="6" id="total" style="text-align:right;padding-right:20px;">总计:@String.Format("{0:C2}", Model.Total) </td>
+        </tr>
+        <tr>
+            <td colspan="6" style="text-align:center">
+                <input type="submit" value=" 提交订单 " class="btn btn-default" />
+            </td>
+        </tr>
+    </table>
+    }
+
+    <div style="color: red">@TempData["msg"]</div>
+</div>
+
+

@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ChangeDBModelStoreContainer" CdmEntityContainer="ChangeDBEntities">
+    <EntitySetMapping Name="AdminUser">
+      <EntityTypeMapping TypeName="ChangeDBModel.AdminUser">
+        <MappingFragment StoreEntitySet="AdminUser">
+          <ScalarProperty Name="SuId" ColumnName="SuId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+          <ScalarProperty Name="role" ColumnName="role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Appraise">
+      <EntityTypeMapping TypeName="ChangeDBModel.Appraise">
+        <MappingFragment StoreEntitySet="Appraise">
+          <ScalarProperty Name="AppraiseId" ColumnName="AppraiseId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Grade" ColumnName="Grade" />
+          <ScalarProperty Name="RateTime" ColumnName="RateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Category">
+      <EntityTypeMapping TypeName="ChangeDBModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="CateId" ColumnName="CateId" />
+          <ScalarProperty Name="CateName" ColumnName="CateName" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Delivery">
+      <EntityTypeMapping TypeName="ChangeDBModel.Delivery">
+        <MappingFragment StoreEntitySet="Delivery">
+          <ScalarProperty Name="DeliveryID" ColumnName="DeliveryID" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Consignee" ColumnName="Consignee" />
+          <ScalarProperty Name="Complete" ColumnName="Complete" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Favorite">
+      <EntityTypeMapping TypeName="ChangeDBModel.Favorite">
+        <MappingFragment StoreEntitySet="Favorite">
+          <ScalarProperty Name="FavoriteID" ColumnName="FavoriteID" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="ChangeDBModel.News">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="NewsID" ColumnName="NewsID" />
+          <ScalarProperty Name="NTypes" ColumnName="NTypes" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
+          <ScalarProperty Name="PushTime" ColumnName="PushTime" />
+          <ScalarProperty Name="States" ColumnName="States" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="ChangeDBModel.Orders">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="OrdersID" ColumnName="OrdersID" />
+          <ScalarProperty Name="Orderdate" ColumnName="Orderdate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="DeliveryID" ColumnName="DeliveryID" />
+          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+          <ScalarProperty Name="States" ColumnName="States" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdersDetail">
+      <EntityTypeMapping TypeName="ChangeDBModel.OrdersDetail">
+        <MappingFragment StoreEntitySet="OrdersDetail">
+          <ScalarProperty Name="DetailID" ColumnName="DetailID" />
+          <ScalarProperty Name="OrdersID" ColumnName="OrdersID" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="States" ColumnName="States" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Photo">
+      <EntityTypeMapping TypeName="ChangeDBModel.Photo">
+        <MappingFragment StoreEntitySet="Photo">
+          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product">
+      <EntityTypeMapping TypeName="ChangeDBModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CateId" ColumnName="CateId" />
+          <ScalarProperty Name="MarketPrice" ColumnName="MarketPrice" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="PostTime" ColumnName="PostTime" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="ChangeDBModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Nick" ColumnName="Nick" />
+          <ScalarProperty Name="DeliveryID" ColumnName="DeliveryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

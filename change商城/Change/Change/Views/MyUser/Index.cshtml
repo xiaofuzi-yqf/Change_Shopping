@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "个人中心";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    List<Orders> nopayList = ViewBag.nopay;
+    List<Orders> nosendList = ViewBag.nosend;
+    List<Orders> noconfirmList = ViewBag.noconfirm;
+}
+
+<div>
+    <h2><img src="~/images/nopay.png"  style="width:20px; padding-left:20px;" />未付款订单 </h2><hr />
+    <table id="car">
+        <tr class="th">
+            <td style="width: 100px">订单编号</td>
+            <td style="width: 200px">总价</td>
+            <td style="width: 300px">下单时间</td>
+            <td style="width: 200px">操作</td>
+        </tr>
+        @foreach (var item in nopayList)
+        {
+            <tr>
+                <td>@item.OrdersID</td>
+                <td>@string.Format("{0:C}",item.Total)</td>
+                <td>@item.Orderdate</td>
+                <td><a href="/Car/OrderPay/@item.OrdersID" class="linkbutton">去付款</a></td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div>
+    <h2><img src="~/images/nosend.png"  style="width:20px; padding-left:20px;" />未发货订单 </h2><hr />
+    <table id="car">
+        <tr class="th">
+            <td style="width: 100px">订单编号</td>
+            <td style="width: 200px">总价</td>
+            <td style="width: 300px">下单时间</td>
+            <td style="width: 200px">操作</td>
+        </tr>
+        @foreach (var item in nosendList)
+        {
+            <tr>
+                <td>@item.OrdersID</td>
+                <td>@string.Format("{0:F}",item.Total)</td>
+                <td>@item.Orderdate</td>
+                <td></td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div>
+    <h2><img src="~/images/nosend.png" style="width:20px; padding-left:20px;" />未收货订单 </h2><hr />
+    <table id="car">
+        <tr class="th">
+            <td style="width: 100px">订单编号</td>
+            <td style="width: 200px">总价</td>
+            <td style="width: 300px">下单时间</td>
+            <td style="width: 200px">操作</td>
+        </tr>
+        @foreach (var item in noconfirmList)
+        {
+            <tr>
+                <td>@item.OrdersID</td>
+                <td>￥@item.Total</td>
+                <td>@item.Orderdate</td>
+                <td><a href="/MyUser/Confirm/@item.OrdersID" class="linkbutton">确认收货</a> </td>
+            </tr>
+        }
+    </table>
+</div>
+
+

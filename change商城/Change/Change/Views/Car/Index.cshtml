@@ -1,0 +1,57 @@
+﻿@model Change.Models.Orders
+@{
+    ViewBag.Title = "购物车";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="smalltitle">
+    <p> <span><a href="/Home/Index">首页</a>></span> <span>我的Change ></span> <span id="order">购物车</span> </p>
+</div>
+<div id="central">
+    <!--购物车图标-->
+    <div id="carlogo">
+        <ul>
+            <li id="carlogo1_cur">
+                <p style="color:#fff">1  我的购物车</p>
+            </li>
+            <li id="carlogo2">
+                <p>2  填写核对订单信息</p>
+            </li>
+            <li id="carlogo3">
+                <p>3  成功提交订单</p>
+            </li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+    <table id="car">
+        <tr class="th">
+            <td style="width: 100px; ">图片</td>
+            <td style="width: 200px; ">名称</td>
+            <td style="width: 100px; ">单价</td>
+            <td style="width: 200px; ">数量</td>
+            <td style="width: 100px; ">小计</td>
+            <td style="width: 100px; ">操作</td>
+        </tr>
+        @foreach (var item in Model.OrdersDetail)
+        {
+            <tr>
+                <td><img src="@item.Product.Photo.First().PhotoUrl" width="100px" height="100px" /></td>
+                <td>@item.Product.Title</td>
+                <td>@String.Format("{0:C2}", item.Product.Price)</td>
+                <td><a href="/Car/Add/@item.Product.ProductId?quantity=1" class="linkbutton">+</a>@item.Quantity <a href="/Car/Del/@item.Product.ProductId" class="linkbutton">-</a></td>
+                <td>@String.Format("{0:C2}", item.Quantity * item.Product.Price)</td>
+                <td><a href="/Car/Remove/@item.Product.ProductId" class="linkbutton">移除</a></td>
+            </tr>
+        }
+            <tr class="th">
+                <td colspan="6" id="total" style="text-align:right;padding-right:20px;">总计:@String.Format("{0:C2}", Model.Total) </td>
+            </tr>
+            <tr>
+                <td colspan="6" style="padding-left:220px">
+                    <a href="/Car/Clear" class="linkbutton1">清空购物车</a> <a href="/Car/Order" class="linkbutton1">去结算</a>
+                    <div class="clear"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+

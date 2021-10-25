@@ -1,0 +1,22 @@
+﻿@model Change.Models.Product
+
+@{
+    ViewBag.Title = "商品详情";
+    Layout = "~/Views/Shared/_LayoutDetail.cshtml";
+}
+
+<div id="detail">
+    <ul>
+        <li style="border-top:3px solid red; height:38px;line-height:38px"><a href="/Products/Details/@Model.ProductId">商品详情</a></li>
+        <li><a href="/Products/DetailsRate/@Model.ProductId">累计评价(<span class="red">@ViewBag.TotalRate</span>)</a></li>
+    </ul>
+    <div id="content">
+        @Html.Raw(Model.Content)
+    </div>
+    <div id="images">
+        @foreach (Photo item in Model.Photo)
+        {
+            <img src="@item.PhotoUrl" />
+        }
+    </div>
+</div>

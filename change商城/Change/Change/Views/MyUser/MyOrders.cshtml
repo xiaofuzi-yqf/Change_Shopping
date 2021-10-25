@@ -1,0 +1,68 @@
+﻿@model PagedList<Change.Models.Orders>
+@{
+    ViewBag.Title = "我的订单";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div>
+    <span style="font-size:14px;">
+        <a href="/MyUser/MyOrders">全部</a>
+        | <a href="/MyUser/MyOrders?states=0">未付款</a>
+        | <a href="/MyUser/MyOrders?states=1">已付款</a>
+        | <a href="/MyUser/MyOrders?states=2">已发货</a>
+        | <a href="/MyUser/MyOrders?states=3">已收货</a>
+        | <a href="/MyUser/MyOrders?states=9">已关闭</a>
+    </span>
+</div>
+<table id="car">
+    <tr class="th">
+        <td style="width: 100px">订单编号</td>
+        <td style="width: 100px">总价</td>
+        <td style="width: 200px">下单时间</td>
+        <td style="width: 100px">状态</td>
+        <td style="width: 200px">操作</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.OrdersID</td>
+            <td>￥@item.Total</td>
+            <td>@item.Orderdate</td>
+            <td>@(item.States == 0 ? "未付款" : item.States == 1 ? "已付款" : item.States == 2 ? "已发货" : item.States == 3 ? "已收货" : item.States == 4 ? "已评价" : "已关闭")</td>
+            <td>
+                @if (item.States == 0)
+                {
+                    <a href="/Car/OrderPay/@item.OrdersID" class="linkbutton">去付款</a>
+                }
+                else if (item.States == 2)
+                {
+                    <a href="/MyUser/Confirm/@item.OrdersID" class="linkbutton">确认收货</a>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5">
+                <table style="width:500px;margin-left:200px;">
+                    @foreach (var detail in item.OrdersDetail)
+                    {
+                        <tr>
+                            <td><img src="@detail.Product.Photo.First().PhotoUrl" width="100px" height="100px" /></td>
+                            <td>@detail.Product.Title</td>
+                            <td>￥@detail.Product.Price</td>
+                            <td>@detail.Quantity </td>
+                            <td>￥@(detail.Quantity * detail.Product.Price)</td>
+                            <td>
+                                @if (item.States >= 3)
+                                {<a href="/Appraises/Create/@detail.Product.ProductId" class="linkbutton">去评价</a>}
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </td>
+        </tr>
+    }
+    <tr class="th">
+        <td colspan="6" id="total" style="text-align:right;padding-right:20px;">
+            @Html.Pager(Model).Options(o => o.SetPageIndexParameterName("id").SetHorizontalAlign("right").SetPagerItemTemplate("&nbsp;{0}"))
+        </td>
+    </tr>
+</table>

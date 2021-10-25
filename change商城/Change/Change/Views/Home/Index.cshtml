@@ -1,0 +1,239 @@
+﻿@{
+    ViewBag.Title = "首页";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<News> news = ViewBag.News;
+}
+
+<div id="mid">
+    <!--全部分类-->
+    <div id="types">
+        <!--分类-->
+        @foreach (Category item in ViewBag.Categories)
+        {
+            <dl>
+                <dt>@item.CateName</dt>
+                <dd>
+                    @foreach (Category subitem in item.Category1)
+                    {
+                        <a href="/Home/Category/@subitem.CateId">@subitem.CateName</a>
+                    }
+                </dd>
+            </dl>
+        }
+    </div>
+    <div id="banner">
+        <!--广告条幅 -->
+        <div class="section2013">
+            <div class="thematic_fields">
+                <div class="thematic_fields_l">
+                    <div class="carousel">
+                        <ul class="banner_2013  hom_pptindex" id="screenboard">
+                            @foreach (News item in news)
+                            {
+                                <li style="z-index: 2; opacity: 1; top: 2px; left: 0px; height: 310px;"><a target="_blank" href="#" title="" alt=""> <img class="zz" src="/images/loadbackground.gif" style="height: 310px" title="" alt="" width="750px" initsrc="@item.PhotoUrl"></a></li>
+                            }
+                        </ul>
+                        <ul class="banner_tag_2013" id="switcherboard">
+                            <li class="curr_tag2013"><a href="javascript:void(0);"><img class="transparent" src="/images/2013_public2.png"></a></li>
+                            @for (int i = 1; i < news.Count; i++)
+                            {
+                                <li class=""><a href="javascript:void(0);"><img class="transparent" src="/images/2013_public2.png"></a></li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<!--1F服装-->
+<div id="mid1">
+    <ul class="ptitle">
+        <li class="title">1F - 服装区</li>
+        <li class="more"><a href="#">更多>></a></li>
+    </ul>
+    <div class="products">
+        @foreach (Product item in ViewBag.Products1)
+        {
+            <dl>
+                <dt><a href="/Products/Details/@item.ProductId"><img src=@item.Photo.First().PhotoUrl /></a></dt>
+                <dd><a href="/Products/Details/@item.ProductId">@item.Title  @String.Format("{0:C2}", item.Price)  </a></dd>
+            </dl>
+        }
+            <div class="clear"></div>
+        </div>
+</div>
+<!--2F数码-->
+<div id="mid2">
+    <ul class="ptitle">
+        <li class="title">2F - 数码区</li>
+        <li class="more"><a href="#">更多>></a></li>
+    </ul>
+    <div class="products">
+        @foreach (Product item in ViewBag.Products2)
+        {
+            <dl>
+                <dt><a href="/Products/Details/@item.ProductId"><img src=@item.Photo.First().PhotoUrl /></a></dt>
+                <dd><a href="/Products/Details/@item.ProductId">@item.Title  @String.Format("{0:C2}", item.Price)  </a></dd>
+            </dl>
+        }
+        <div class="clear"></div>
+    </div>
+</div>
+<!--3F美食-->
+<div id="mid3">
+    <ul class="ptitle">
+        <li class="title">3F - 美食区</li>
+        <li class="more"><a href="#">更多>></a></li>
+    </ul>
+    <div class="products">
+        @foreach (Product item in ViewBag.Products3)
+        {
+            <dl>
+                <dt><a href="/Products/Details/@item.ProductId"><img src=@item.Photo.First().PhotoUrl /></a></dt>
+                <dd><a href="/Products/Details/@item.ProductId">@item.Title  @String.Format("{0:C2}", item.Price)  </a></dd>
+            </dl>
+        }
+        <div class="clear"></div>
+    </div>
+</div>
+<!--4F美妆-->
+
+<script class="privateJs" type="text/javascript">
+    //广告轮换控件脚本
+    var VisibleSlide = function (linum, dom_id, left, right) {
+        var move_one_width = parseInt($('.' + dom_id + ' ul>li').css("width")) + parseInt($('.' + dom_id + ' ul>li').css("margin-left"));//alert(move_one_width)//大图宽度及左侧margin
+        var num = parseInt($('.' + dom_id + ' ul>li').length);//alert(num)
+        var slidenum = linum;
+        var lock = 1;
+        var rollright = function (target) {
+            if (lock == 2) { return; }
+
+            if (typeof (target) == 'undefined') {
+                var cu_scroll = parseInt($('.' + dom_id).scrollLeft());
+                target = cu_scroll + slidenum * move_one_width;
+            }
+            if (target > ((num - slidenum) * move_one_width)) {
+                var target = 0;
+            }
+
+            lock = 2;
+            moveSlowDown(target);
+        }
+        var rollleft = function (target) {
+            if (lock == 2) { return; }
+
+            if (typeof (target) == 'undefined') {
+                var cu_scroll = parseInt($('.' + dom_id).scrollLeft());
+                target = cu_scroll - slidenum * move_one_width;
+            }
+            if (target < 0) {
+                var target = (num - slidenum) * move_one_width;
+            }
+
+
+            lock = 2;
+            moveSlowDown(target);
+        }
+        //#-减速运动效果
+        var moveSlowDown = function (target) {
+            var ns = target - parseInt($('.' + dom_id).scrollLeft());
+            moveElement(ns);
+        }
+        //#-减速运动子阶段，递归函数，归零方休
+        var moveElement = function (ns) {
+            if (ns == 0) {
+                lock = 1;
+                return;
+            }
+
+            var step = ns > 0 ? parseInt(Math.ceil(ns / 10)) : parseInt(Math.floor(ns / 10));//这里的ceil跟floor的结果，在绝对值上是一样的
+            $('.' + dom_id).scrollLeft(parseInt($('.' + dom_id).scrollLeft()) + step);
+            ns = ns - step;
+            var _moveElement = function (ns) {
+                return function () {
+                    moveElement(ns);
+                };
+            };
+            setTimeout(_moveElement(ns), 1);  // alert(2)
+            // $('#'+left).click(function(){roll();}) ;
+        }
+
+
+        this.init = function () {
+
+            $('#' + left).click(function () {
+                rollleft();
+
+                $('.click_glide_c').find("img").each(function () {
+                    var img = this;
+                    if (img.getAttribute("initsrc")) {
+                        img.src = img.getAttribute("initsrc");
+                        img.removeAttribute("initsrc");
+                    }
+                });
+
+            });
+
+            $('#' + right).click(function () {
+                rollright();
+                $('.click_glide_c').find("img").each(function () {
+                    var img = this;
+                    if (img.getAttribute("initsrc")) {
+                        img.src = img.getAttribute("initsrc");
+                        img.removeAttribute("initsrc");
+                    }
+                });
+            })
+
+        }
+    }
+
+    var weibo = new VisibleSlide(3, "click_glide_c", "salegoodsLeft", "salegoodsRight");
+    weibo.init();
+
+    //广告轮换控件
+    var second = 5;
+    var outSecond = 0.3;
+    var getNextScreenNum = function (i) {
+        var max = $("#switcherboard li").length;
+        if (i < max - 1) {
+            return i + 1;
+        } else {
+            return 0;
+        }
+    };
+
+    $("#switcherboard li").mouseover(function () {
+        if (typeof autoSwitch != 'undefined') {
+            clearTimeout(autoSwitch);
+        }
+        var obj = this;
+        switchTime = setTimeout(function () {
+            $(obj).addClass('curr_tag2013').siblings().removeClass('curr_tag2013');
+            $("#screenboard li").eq($('#switcherboard li').index(obj)).css({ 'opacity': '1' }).siblings().filter(function () {
+                return $(this).css('opacity');
+            }).animate({ 'opacity': 0 }, outSecond * 1000, function () {
+                $(this).css('z-index', '1');
+                $("#screenboard li").eq($('#switcherboard li').index(obj)).css('z-index', '2')
+            });
+            $("#screenboard li").eq($('#switcherboard li').index(obj)).find("img").each(function () {
+                var img = this;
+                if (img.getAttribute("initsrc")) {
+                    img.src = img.getAttribute("initsrc");
+                    img.removeAttribute("initsrc");
+                }
+            });
+            autoSwitch = setTimeout(function () {
+                $("#switcherboard li").eq(getNextScreenNum($('#switcherboard li').index(obj))).trigger('mouseover');
+            }, second * 1000);
+        }, outSecond * 1000);
+    }).mouseout(function () {
+        clearTimeout(switchTime);
+    });
+    $(document).ready(function () {
+        autoSwitch = setTimeout(function () { $("#switcherboard li:eq(0)").trigger('mouseover'); }, 10);
+    });
+</script>

@@ -1,0 +1,82 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Change官网-@ViewBag.Title</title>
+    <link href="/css/global.css" rel="stylesheet" type="text/css">
+    <link href="/css/Site.css" rel="stylesheet" type="text/css">
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+</head>
+
+<body>
+    <!--头部固定-->
+    @Html.Partial("~/Views/Shared/_PartialTop.cshtml")
+    <div id="all">
+        <!--首页内容-->
+        <div id="middle">
+            <!--小标题-->
+            <div id="smalltitle">
+                <p> <span><a href="/Home/Index">首页</a>></span><span id="order">@ViewBag.Title</span> </p>
+            </div>
+            <div id="photos">
+                <div id="pleft">
+                    <div id="show">
+                        @{
+                            int i = 1;
+                            foreach (Photo item in @Model.Photo)
+                            {
+                                var name = "p" + i;
+                                <a name="@name"></a><img src="@item.PhotoUrl" />
+                                i++;
+                            }
+                        }
+                    </div>
+                    <ul id="link">
+                        @{
+                            i = 1;
+                            foreach (Photo item in @Model.Photo)
+                            {
+                                var name = "p" + i;
+                                <li><a href="#@name"><img src="@item.PhotoUrl" /></a></li>
+                                i++;
+                            }
+                        }
+                        <div style="clear:both"></div>
+                    </ul>
+                </div>
+                <div id="pright">
+                    <div id="ptitle">@Model.Title</div>
+                    <div>市场价：<span class="price1">￥ @Model.MarketPrice </span></div>
+                    <div>活动价：<span class="price2">￥ @Model.Price </span></div>
+                    <div>库存量：<span class="stock"> @Model.Stock  件</span></div>
+                    <div id="pcount">
+                        <a href="#">销量 <span class="red">@ViewBag.TotalSale</span> </a> |
+                        <a href="#">累计评价 <span class="red">@ViewBag.TotalRate</span> </a>
+                    </div>
+                    @using (Html.BeginForm("Add", "Car"))
+                    {
+                        <div>购买数量：
+                    <input type="text" value="1" id="quantity" name="quantity" class="text" style="width:80px"  /> 件 </div>
+                        <div id="op">
+                            <input type="hidden" value="@Model.ProductId" id="id" name="id" />
+                            @if (MyAuthentication.IsLogin())
+                            {
+                                <a href="/Favorites/Create/@Model.ProductId" class="btnop">加入收藏</a>}
+                            <input type="submit" value="加入购物车" class="btnop" />
+                            <!--<a href="#">立即购买</a><a href="#">加入购物车</a>-->
+                        </div>
+                    }
+                </div>
+                <div style="clear:both"></div>
+            </div>
+            @RenderBody()
+        </div>
+        <!--尾部-->
+        <div id="foots">
+            <div id="copy">
+                <p>©2016 Change Technology official website retains all rights.鄂ICP备16001830号</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

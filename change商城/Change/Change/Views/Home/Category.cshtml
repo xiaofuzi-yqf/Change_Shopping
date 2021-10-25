@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Change.Models.Product>
+@{
+    ViewBag.Title = "商品分类";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Category cate = (Category)ViewBag.category;
+}
+<!--小标题-->
+<div id="smalltitle">
+    <p>
+        <span><a href="/Home/Index">首页</a>> 商品分类 > @cate.CateName </span>
+    </p>
+</div>
+<div class="products">
+    @foreach (Product item in Model)
+    {
+        <dl>
+            <dt><a href="/Products/Details/@item.ProductId"><img src=@item.Photo.First().PhotoUrl /></a></dt>
+            <dd><a href="/Products/Details/@item.ProductId">@item.Title  @String.Format("{0:C2}", item.Price)  </a></dd>
+        </dl>
+    }
+    <div class="clear"></div>
+</div>

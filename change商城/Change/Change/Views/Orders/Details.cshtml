@@ -1,0 +1,43 @@
+﻿@model Change.Models.Orders
+
+@{
+    ViewBag.Title = "订单详情";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="address">
+    <h2>订单详情 </h2><hr />
+    <div id="adds" style="padding-left:50px;margin:10px;">
+        <p> 下单用户：@Model.Users.UserName </p>
+        <p> 下单时间：@Model.Orderdate </p>
+        <p> 收货地址：@Model.Delivery.Consignee ( @Model.Delivery.Phone)  @Model.Delivery.Complete </p>
+        <p> 备注：@Model.Remark</p>
+        <p> 状态：@(Model.States == 0 ? "未付款" : Model.States == 1 ? "已付款" : Model.States == 2 ? "已发货" : Model.States == 3 ? "已收货" : Model.States == 4 ? "已评价" : "已关闭") </p>
+    </div>
+    <h2>订单明细 </h2><hr />
+    <table id="car">
+        <tr class="th">
+            <td style="width: 100px; ">图片</td>
+            <td style="width: 200px; ">名称</td>
+            <td style="width: 100px; ">单价</td>
+            <td style="width: 200px; ">数量</td>
+            <td style="width: 100px; ">小计</td>
+        </tr>
+        @foreach (var item in Model.OrdersDetail)
+        {
+            <tr>
+                <td><img src="@item.Product.Photo.First().PhotoUrl" width="100px" height="100px" /></td>
+                <td>@item.Product.Title</td>
+                <td>@String.Format("{0:C2}",item.Product.Price) </td>
+                <td>@item.Quantity </td>
+                <td>@String.Format("{0:C2}", item.Quantity * item.Product.Price) </td>
+            </tr>
+        }
+        <tr class="th">
+            <td colspan="6" id="total" style="text-align:right;padding-right:20px;">总计:@String.Format("{0:C2}", Model.Total)  </td>
+        </tr>
+    </table>
+    <p style="margin-left:30px;">
+        @Html.ActionLink("返回列表", "Index")
+    </p>
+</div>

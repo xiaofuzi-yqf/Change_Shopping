@@ -1,0 +1,79 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model  PagedList<Change.Models.Category>
+
+@{
+    ViewBag.Title = "商品分类列表";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>商品分类列表</h2>
+
+<p>
+    @Html.ActionLink("新建一级分类", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            类型名
+        </th>
+        <th>
+            上级分类
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CateName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category2.CateName)
+            </td>
+            <td>
+                @Html.ActionLink("新建子类", "Create", new { ParentID = item.CateId }) |
+                @Html.ActionLink("编辑", "Edit", new { id = item.CateId }) |
+                @Html.ActionLink("删除", "Delete", new { id = item.CateId })
+            </td>
+        </tr>
+        foreach (var sub in item.Category1)
+        {
+            <tr>
+                <td>
+                    ---- @Html.DisplayFor(modelItem => sub.CateName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => sub.Category2.CateName)
+                </td>
+                <td>
+                    @Html.ActionLink("编辑", "Edit", new { id = sub.CateId }) |
+                    @Html.ActionLink("删除", "Delete", new { id = sub.CateId })
+                </td>
+            </tr>
+        }
+    }
+</table>
+@Html.Pager(Model).Options(o => o.SetPageIndexParameterName("id").SetHorizontalAlign("right").SetPagerItemTemplate("&nbsp;{0}"))
+
+<!--实现分页的HTML代码2-->
+@Html.Pager(Model,
+       new PagerOptions
+       {
+           Id = "pager",
+           PageIndexParameterName = "pageIndex",//控制器参数
+           ContainerTagName = "span",//分页容器形式（默认好像是div）
+           CssClass = "pager",//容器css class
+           ShowMorePagerItems = false,//“更多”按钮不显示
+           CurrentPagerItemTemplate = "<span class=\"current\">{0}</span>",//当前按钮 模版
+           DisabledPagerItemTemplate = "<span class=\"disable\">{0}</span>",//不可用按钮 模版
+           PagerItemTemplate = "<span class=\"able\">{0}</span>",//可用按钮 模版
+           FirstPageText = "首页",
+           PrevPageText = "上一页",
+           NextPageText = "下一页",
+           LastPageText = "末页",
+           PageIndexBoxId = "pagebox",
+           GoToButtonId = "goBtn"
+       }
+   )
+

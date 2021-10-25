@@ -1,0 +1,56 @@
+﻿@model Change.Models.Photo
+
+@{
+    ViewBag.Title = "添加图片";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Product p = (Product)ViewBag.Product;
+}
+
+<h2>添加图片</h2>
+@using (Html.BeginForm("Create", "Photos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset class="form-horizontal">
+        <legend>图片信息</legend>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ProductId, new { @Value = p.ProductId })
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="PhotoUrl">所属商品:</label>
+            <div class="col-md-10">
+                <a href="/Products/Details?id=@p.ProductId">@(p.Title)</a>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhotoUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="PhotoUrl" id="PhotoUrl" />
+                @Html.ValidationMessageFor(model => model.PhotoUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value=" 保存 " class="btn btn-default" />
+            </div>
+        </div>
+    </fieldset>
+}
+<!--展示所有该商品图片-->
+    <div  id="photos">
+        @foreach (var item in p.Photo)
+        {
+            <dl>
+                <dt><img src="@item.PhotoUrl" /></dt>
+                <dd>@Html.ActionLink("删除", "Delete", new { id = item.PhotoId })</dd>
+            </dl>
+        }
+        <div class="clear"></div>
+    </div>
+    <div>
+        @Html.ActionLink("返回商品列表", "Index","Products")
+    </div>
+

@@ -1,0 +1,69 @@
+﻿@model Change.Models.Delivery
+
+@{
+    ViewBag.Title = "收货地址";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    Users user = (Users)ViewBag.User;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset class="form-horizontal">
+        <legend>收货地址信息</legend>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.UserId, new { @Value = user.UserId })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Consignee, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Consignee, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Consignee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Complete, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Complete, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Complete, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value=" 保存 " class="btn btn-default" />
+            </div>
+        </div>
+        <h2>收货地址 </h2><hr />
+        <div id="adds" style="padding-left:50px;margin:10px;">
+            @foreach (var item in user.Delivery)
+            {
+                if (user.DeliveryID == item.DeliveryID)
+                {
+                    <p style="font-weight:bold;color:red;">
+                        @item.Consignee (@item.Phone) @item.Complete (默认地址)
+                    </p>
+                }
+                else
+                {
+                    <p>
+                        @item.Consignee (@item.Phone) @item.Complete
+                        <a href="/Deliveries/Delete/@item.DeliveryID"> 【删除】 </a>  
+                        <a href="/Deliveries/SetDefault/@item.DeliveryID"> 【设为默认】 </a>
+                    </p>
+                }
+            }
+            </div>
+        </fieldset>
+    }

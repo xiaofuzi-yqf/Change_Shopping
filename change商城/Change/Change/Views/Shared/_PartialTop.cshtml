@@ -1,0 +1,21 @@
+﻿   <!--头部固定-->
+<div id="fix">
+    <ul>
+        @if (MyAuthentication.IsLogin() && MyAuthentication.GetRights() == "user")
+        {
+            <li id="left">欢迎您 <span style="color:red;"> @MyAuthentication.GetUserName() </span>  【<a href="/Home/Logout">退出</a>】</li>
+        }
+        else
+        {
+            <li id="left">欢迎光临Change商城 【 <a href="/Home/Login">登录</a> | <a href="/Home/Register">注册</a> 】</li>
+        }
+            <li id="right">
+                <a href="/Home/Index">☞Change商城</a>
+                | <a href="/MyUser/Index">我的change</a>
+                | <a href="/Car/Index"><img src="/images/ico.gif" height="15px" />购物车</a>
+                | <a href="/Favorites/Index">收藏夹</a>
+                | <a href="/Admin/Index" target="_blank">登录后台</a>
+            </li>
+        <div class="clear"></div>
+    </ul>
+</div>

@@ -1,0 +1,51 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Change官网--个人中心</title>
+    <link href="/css/global.css" rel="stylesheet" type="text/css">
+    <link href="/css/Site.css" rel="stylesheet" type="text/css">
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+</head>
+
+<body>
+    <!--头部固定-->
+    @Html.Partial("~/Views/Shared/_PartialTop.cshtml")
+    <div id="all">
+        <!--头部搜索-->
+        @Html.Partial("~/Views/Shared/_PartialTopSearch.cshtml")
+        <!--头部菜单-->
+
+        <div id="menu">
+            <ul>
+                <li id="fenlei"><a href="/MyUser/Index" class="active">我的Change</a></li>
+                <li><a href="/MyUser/MyInfo">个人资料</a></li>
+                <li><a href="/Deliveries/Create">收货地址</a></li>
+                <li><a href="/MyUser/MyOrders">我的订单</a></li>
+                <li><a href="/Appraises/Index">评价管理</a></li>
+                <li><a href="/Favorites/Index">收藏夹</a></li>
+                <li><a href="/MyUser/ChangePwd">修改密码</a></li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <!--首页内容-->
+        <div id="middle">
+            <!--小标题-->
+            <div id="smalltitle">
+                <p>
+                    <span><a href="#">首页</a>></span>
+                    <span>我的Change ></span>
+                    <span id="order">@ViewBag.Title</span>
+                </p>
+            </div>
+            @RenderBody()
+        </div>
+        <!--尾部-->
+        <div id="foots">
+            <div id="copy">
+                <p>©2016 Change Technology official website retains all rights.鄂ICP备16001830号</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+﻿@model PagedList<Change.Models.Orders>
+
+@{
+    ViewBag.Title = "订单列表";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>@ViewBag.Title  
+    <span style="font-size:14px;">
+        <a href="/Orders/Index">全部</a>
+        | <a href="/Orders/Index?states=0">未付款</a>
+        | <a href="/Orders/Index?states=1">已付款</a>
+        | <a href="/Orders/Index?states=2">已发货</a>
+        | <a href="/Orders/Index?states=3">已收货</a>
+        | <a href="/Orders/Index?states=9">已关闭</a>
+    </span></h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Orderdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeliveryDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.States)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Delivery.Consignee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Users.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Orderdate)
+        </td>
+        <td>
+            ￥@Html.DisplayFor(modelItem => item.Total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeliveryDate)
+        </td>
+        <td>
+            @(item.States == 0 ? "未付款" : item.States == 1 ? "已付款" : item.States == 2 ? "已发货" : item.States == 3 ? "已收货" : item.States == 4 ? "已评价" : "已关闭")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Delivery.Consignee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Users.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("详情", "Details", new { id = item.OrdersID }, htmlAttributes: new { @target = "_blank" })
+            @if (item.States == 0)
+            {
+                <a href="/Orders/Close/@item.OrdersID" class="linkbutton"> 关闭订单 </a>
+            } 
+            else if (item.States == 1)
+            {
+                <a href="/Orders/Send/@item.OrdersID" class="linkbutton"> 发货 </a>
+            }
+
+        </td>
+    </tr>
+}
+    <tr><td colspan="6">
+    @Html.Pager(Model).Options(o => o.SetPageIndexParameterName("id").SetHorizontalAlign("right").SetPagerItemTemplate("&nbsp;{0}"))
+
+</td></tr>
+</table>

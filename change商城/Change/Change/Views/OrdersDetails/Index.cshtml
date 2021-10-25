@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Change.Models.OrdersDetail>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.States)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Orders.OrdersID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Title)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.States)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Orders.OrdersID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Title)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DetailID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DetailID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DetailID })
+        </td>
+    </tr>
+}
+
+</table>

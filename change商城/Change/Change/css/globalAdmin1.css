@@ -1,0 +1,152 @@
+﻿@charset "utf-8";
+/* CSS Document */
+* {
+    margin: 0px;
+    border: 0px;
+    /*color: #898686;*/
+    text-decoration: none;
+    font-family: 微软雅黑;
+}
+body {
+	background-color: #EEEAF2;
+	font-size: 14px;
+}
+.clear {
+	clear: both;
+	width: 0px;
+}
+a{
+    color:blue;
+}
+    a:hover {
+        color: blue;
+    }
+ul {
+	list-style: none;
+}
+.center {
+	margin: 0px auto;
+}
+#copytop {
+	border-top: 1px solid #c8c8c8;
+	margin-top: 20px;
+}
+#copy {
+	margin: 0px auto;
+	margin-left: 60px;
+	margin-right: 40px;
+	margin-top: 20px;
+}
+#copy p {
+	text-align: center;
+}
+/*logo栏*/
+#logo {
+	height: 80px;
+	border-bottom: 1px solid #c8c8c8;
+}
+#logo ul li {
+	line-height: 90px;
+	float: left;
+}
+#logo ul li img {
+	margin-left: 15px;
+	margin-top: 10px;
+	height: 70px;
+}
+#logo ul .menu {
+	margin-left: 20px;
+}
+#logo ul .menu a {
+	color: #000000;
+}
+#logo ul .menu a:hover {
+	color: #24b4f3;
+}
+#indexwelcome {
+	margin: 0px auto;
+	width: 800px;
+	border: 1px solid #c8c8c8;
+	margin-top: 20px;
+    background-color:#60c1eb;
+    padding:10px 40px;
+}
+#indexwelcome #indexwelcomeone {
+	width: 400px;
+	margin: 0px auto;
+	font-size: 18px;
+	color: #3189f5;
+	height: 200px;
+	line-height: 200px;
+}
+/*左边*/
+#indexwelcome #Productsone {
+	float: left;
+	margin-top: 20px;
+}
+#indexwelcome #Productsone ul li .name {
+	width: 300px;
+	height: 30px;
+	line-height: 30px;
+	text-align: right;
+}
+/*右边*/
+#indexwelcome #Productstwo {
+	float: right;
+	margin-top: 30px;
+}
+#indexwelcome #Productstwo ul li p {
+	width: 550px;
+	height: 30px;
+	line-height: 30px;
+	text-align: left;
+}
+#indexwelcome #Productstwo ul li p .neirong {
+	border: 1px solid #c8c8c8;
+	width: 300px;
+	height: 35px;
+	color: #000000;
+}
+#button {
+	width: 80px;
+	height: 80px;
+	margin-top: 50px;
+}
+/*购物车图标*/
+#imageslogo {
+	width: 700px;
+	margin: 0px auto;
+	margin-top: 30px;
+}
+#imageslogo ul {
+	text-align: center;
+}
+#imageslogo ul li {
+	height: 30px;
+	width: 200px;
+	float: left;
+	margin-right: 10px;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+#imageslogo ul #imageslogoone {
+	background-color: #31a5e7;
+	color: #ffffff;
+}
+#imageslogo ul #imageslogoone p {
+	color: #ffffff;
+	line-height: 30px;
+}
+#imageslogo ul .imageslogotwo p {
+	line-height: 30px;
+}
+
+#indexLogin {
+    margin: 0px auto;
+    width: 315px;
+    border: 1px solid #c8c8c8;
+    margin-top: 20px;
+    text-align:center;
+}

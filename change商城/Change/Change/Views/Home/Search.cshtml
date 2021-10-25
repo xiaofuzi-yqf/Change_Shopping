@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Change.Models.Product>
+@{
+    ViewBag.Title = "查询结果";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--小标题-->
+<div id="smalltitle">
+    <p>
+        <span><a href="/Home/Index">首页</a>> 查询 <span class="green">@ViewBag.search</span>  结果 </span>
+    </p>
+</div>
+
+<div id="mid3">
+    <div>
+        <ul class="ptitle">
+            <li class="title">共查询到  <span class="red">@Model.Count()</span> 个商品</li>
+            <li class="more"><a href="#"> ...</a></li>
+        </ul>
+    </div>
+    <div class="products">
+        @foreach (Product item in Model)
+        {
+            <dl>
+                <dt><a href="/Products/Details/@item.ProductId"><img src=@item.Photo.First().PhotoUrl /></a></dt>
+                <dd><a href="/Products/Details/@item.ProductId">@item.Title  @String.Format("{0:C2}", item.Price)  </a></dd>
+            </dl>
+        }
+        <div class="clear"></div>
+    </div>
+</div>
+

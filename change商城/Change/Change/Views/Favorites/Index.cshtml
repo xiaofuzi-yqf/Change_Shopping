@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Change.Models.Favorite>
+
+@{
+    ViewBag.Title = "收藏夹";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            编号
+        </th>
+        <th>
+            图片
+        </th>
+        <th>
+            商品名
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FavoriteID)
+        </td>
+        <td>
+            <img src="@Html.DisplayFor(modelItem => item.Product.Photo.First().PhotoUrl)" style="width:100px;height:100px;" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Title)
+        </td>
+        <td>
+            @Html.ActionLink("删除", "Delete", new { id = item.FavoriteID })
+        </td>
+    </tr>
+}
+
+</table>

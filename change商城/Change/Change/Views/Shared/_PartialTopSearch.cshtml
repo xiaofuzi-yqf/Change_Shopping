@@ -1,0 +1,14 @@
+﻿        <!--头部搜索-->
+<div id="head">
+    <ul>
+        <li id="headone"><a href="/Home/Index"> <img src="/images/logo/logo.png" alt="Change官网" /></a></li>
+        <li id="headtwo">
+            @using (Html.BeginForm("Search", "Home"))
+            {
+                <input type="text" name="searchText" id="searchText" />
+                <input type="submit" id="searchBtn" value="搜 索" />
+            }
+            </li>
+        <div class="clear"></div>
+    </ul>
+</div>

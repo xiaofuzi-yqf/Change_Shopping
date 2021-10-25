@@ -1,0 +1,40 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Change官网-@ViewBag.Title</title>
+    <link href="/css/global.css" rel="stylesheet" type="text/css">
+    <link href="/css/Site.css" rel="stylesheet" type="text/css">
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+</head>
+
+<body>
+    <!--头部固定-->
+    @Html.Partial("~/Views/Shared/_PartialTop.cshtml")
+    <div id="all">
+        <!--头部搜索-->
+        @Html.Partial("~/Views/Shared/_PartialTopSearch.cshtml")
+        <!--头部菜单-->
+        <div id="menu">
+            <ul>
+                <li id="fenlei">全部商品分类</li>
+                <li><a href="/Home/Index" class="active">首页</a></li>
+                <li><a href="/Home/News?type=促销活动">促销活动</a></li>
+                <li><a href="/Home/News?type=大宗礼品">大宗礼品</a></li>
+                <li><a href="/Home/News?type=活动咨询">活动咨询</a></li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <!--首页内容-->
+        <div id="middle">
+            @RenderBody()
+        </div>
+        <!--尾部-->
+        <div id="foots">
+            <div id="copy">
+                <p>©2016 Change Technology official website retains all rights.鄂ICP备16001830号</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

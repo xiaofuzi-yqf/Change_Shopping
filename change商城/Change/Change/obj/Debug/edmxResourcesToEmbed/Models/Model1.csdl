@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChangeDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AdminUser">
+    <Key>
+      <PropertyRef Name="SuId" />
+    </Key>
+    <Property Name="SuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="role" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Appraise">
+    <Key>
+      <PropertyRef Name="AppraiseId" />
+    </Key>
+    <Property Name="AppraiseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Grade" Type="Int32" />
+    <Property Name="RateTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Appraise__Produc__239E4DCF" FromRole="Appraise" ToRole="Product" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Appraise__UserId__22AA2996" FromRole="Appraise" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CateId" />
+    </Key>
+    <Property Name="CateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ParentId" Type="Int32" />
+    <NavigationProperty Name="Category1" Relationship="Self.FK__Category__Parent__1920BF5C" FromRole="Category" ToRole="Category1" />
+    <NavigationProperty Name="Category2" Relationship="Self.FK__Category__Parent__1920BF5C" FromRole="Category1" ToRole="Category" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Product__CateId__1BFD2C07" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Delivery">
+    <Key>
+      <PropertyRef Name="DeliveryID" />
+    </Key>
+    <Property Name="DeliveryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="Consignee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Complete" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Delivery__UserId__15502E78" FromRole="Delivery" ToRole="Users" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Delivery__29572725" FromRole="Delivery" ToRole="Orders" />
+    <NavigationProperty Name="Users1" Relationship="Self.FK_Users_Delivery" FromRole="Delivery" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Favorite">
+    <Key>
+      <PropertyRef Name="FavoriteID" />
+    </Key>
+    <Property Name="FavoriteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Favorite__Produc__31EC6D26" FromRole="Favorite" ToRole="Product" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Favorite__UserId__32E0915F" FromRole="Favorite" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="NewsID" />
+    </Key>
+    <Property Name="NewsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NTypes" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhotoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PushTime" Type="DateTime" Precision="3" />
+    <Property Name="States" Type="Int32" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OrdersID" />
+    </Key>
+    <Property Name="OrdersID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Orderdate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="DeliveryID" Type="Int32" />
+    <Property Name="DeliveryDate" Type="DateTime" Precision="0" />
+    <Property Name="States" Type="Int32" />
+    <NavigationProperty Name="Delivery" Relationship="Self.FK__Orders__Delivery__29572725" FromRole="Orders" ToRole="Delivery" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Orders__UserId__286302EC" FromRole="Orders" ToRole="Users" />
+    <NavigationProperty Name="OrdersDetail" Relationship="Self.FK__OrdersDet__Order__2C3393D0" FromRole="Orders" ToRole="OrdersDetail" />
+    <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="OrdersDetail">
+    <Key>
+      <PropertyRef Name="DetailID" />
+    </Key>
+    <Property Name="DetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrdersID" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="States" Type="Int32" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__OrdersDet__Order__2C3393D0" FromRole="OrdersDetail" ToRole="Orders" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__OrdersDet__Produ__2D27B809" FromRole="OrdersDetail" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Photo">
+    <Key>
+      <PropertyRef Name="PhotoId" />
+    </Key>
+    <Property Name="PhotoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="PhotoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Photo__ProductId__1FCDBCEB" FromRole="Photo" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CateId" Type="Int32" Nullable="false" />
+    <Property Name="MarketPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PostTime" Type="DateTime" Precision="3" />
+    <Property Name="Stock" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Appraise" Relationship="Self.FK__Appraise__Produc__239E4DCF" FromRole="Product" ToRole="Appraise" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__Product__CateId__1BFD2C07" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Favorite" Relationship="Self.FK__Favorite__Produc__31EC6D26" FromRole="Product" ToRole="Favorite" />
+    <NavigationProperty Name="OrdersDetail" Relationship="Self.FK__OrdersDet__Produ__2D27B809" FromRole="Product" ToRole="OrdersDetail" />
+    <NavigationProperty Name="Photo" Relationship="Self.FK__Photo__ProductId__1FCDBCEB" FromRole="Product" ToRole="Photo" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Nick" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DeliveryID" Type="Int32" />
+    <NavigationProperty Name="Appraise" Relationship="Self.FK__Appraise__UserId__22AA2996" FromRole="Users" ToRole="Appraise" />
+    <NavigationProperty Name="Delivery" Relationship="Self.FK__Delivery__UserId__15502E78" FromRole="Users" ToRole="Delivery" />
+    <NavigationProperty Name="Delivery1" Relationship="Self.FK_Users_Delivery" FromRole="Users" ToRole="Delivery" />
+    <NavigationProperty Name="Favorite" Relationship="Self.FK__Favorite__UserId__32E0915F" FromRole="Users" ToRole="Favorite" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__UserId__286302EC" FromRole="Users" ToRole="Orders" />
+  </EntityType>
+  <Association Name="FK__Appraise__Produc__239E4DCF">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Appraise" Type="Self.Appraise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Appraise">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Appraise__UserId__22AA2996">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Appraise" Type="Self.Appraise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Appraise">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Category__Parent__1920BF5C">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Category1" Type="Self.Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CateId" />
+      </Principal>
+      <Dependent Role="Category1">
+        <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__CateId__1BFD2C07">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CateId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Delivery__UserId__15502E78">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Delivery">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Delivery__29572725">
+    <End Role="Delivery" Type="Self.Delivery" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Delivery">
+        <PropertyRef Name="DeliveryID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="DeliveryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Delivery">
+    <End Role="Delivery" Type="Self.Delivery" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Delivery">
+        <PropertyRef Name="DeliveryID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="DeliveryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Favorite__Produc__31EC6D26">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Favorite" Type="Self.Favorite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Favorite">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Favorite__UserId__32E0915F">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Favorite" Type="Self.Favorite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Favorite">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__UserId__286302EC">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrdersDet__Order__2C3393D0">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="OrdersDetail" Type="Self.OrdersDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrdersID" />
+      </Principal>
+      <Dependent Role="OrdersDetail">
+        <PropertyRef Name="OrdersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrdersDet__Produ__2D27B809">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="OrdersDetail" Type="Self.OrdersDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="OrdersDetail">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Photo__ProductId__1FCDBCEB">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Photo">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ChangeDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AdminUser" EntityType="Self.AdminUser" />
+    <EntitySet Name="Appraise" EntityType="Self.Appraise" />
+    <EntitySet Name="Category" EntityType="Self.Category" />
+    <EntitySet Name="Delivery" EntityType="Self.Delivery" />
+    <EntitySet Name="Favorite" EntityType="Self.Favorite" />
+    <EntitySet Name="News" EntityType="Self.News" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" />
+    <EntitySet Name="OrdersDetail" EntityType="Self.OrdersDetail" />
+    <EntitySet Name="Photo" EntityType="Self.Photo" />
+    <EntitySet Name="Product" EntityType="Self.Product" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK__Appraise__Produc__239E4DCF" Association="Self.FK__Appraise__Produc__239E4DCF">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Appraise" EntitySet="Appraise" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Appraise__UserId__22AA2996" Association="Self.FK__Appraise__UserId__22AA2996">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Appraise" EntitySet="Appraise" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Category__Parent__1920BF5C" Association="Self.FK__Category__Parent__1920BF5C">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Category1" EntitySet="Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__CateId__1BFD2C07" Association="Self.FK__Product__CateId__1BFD2C07">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Delivery__UserId__15502E78" Association="Self.FK__Delivery__UserId__15502E78">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Delivery" EntitySet="Delivery" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Delivery__29572725" Association="Self.FK__Orders__Delivery__29572725">
+      <End Role="Delivery" EntitySet="Delivery" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Delivery" Association="Self.FK_Users_Delivery">
+      <End Role="Delivery" EntitySet="Delivery" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Favorite__Produc__31EC6D26" Association="Self.FK__Favorite__Produc__31EC6D26">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Favorite" EntitySet="Favorite" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Favorite__UserId__32E0915F" Association="Self.FK__Favorite__UserId__32E0915F">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Favorite" EntitySet="Favorite" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__UserId__286302EC" Association="Self.FK__Orders__UserId__286302EC">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrdersDet__Order__2C3393D0" Association="Self.FK__OrdersDet__Order__2C3393D0">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrdersDetail" EntitySet="OrdersDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrdersDet__Produ__2D27B809" Association="Self.FK__OrdersDet__Produ__2D27B809">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="OrdersDetail" EntitySet="OrdersDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Photo__ProductId__1FCDBCEB" Association="Self.FK__Photo__ProductId__1FCDBCEB">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Photo" EntitySet="Photo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
